@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="container">
+    <div class="my-5">
+        <div class="row product">
+            <div class="col-md-6 mb-4 text-center">
+                <img src="{{ item_data.image.url }}" alt="" class="img-fluid">
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body px-2 py-1">
+                        <div class="p-4">
+                            <h3>{{ item_data.title }}</h3>
+                            <p class="mb-3">{{ item_data.category }}</p>
+                            <hr>
+                            <p>価格：<span class="text-danger font-weight-bold">¥{{ item_data.price| intcomma }}</span></p>
+                            <form method="POST" action="" class="mb-3">
+                                <select id="id_choice1" name="choice1">
+                                  <option value="ssize">Sサイズ</option>
+                                  <option value="msize">Mサイズ</option>
+                                  <option value="lsize">Lサイズ</option>
+                                  <option value="xlsize">XLサイズ</option>
+                                </select>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="xxxxxxxx" />
+                            </form>
+                            <a href="{% url 'additem' item_data.slug %}" class="btn btn-primary">カートに入れる</a>
+                            <p class="font-weight-bold">商品説明</p>
+                            <p>{{ item_data.description|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

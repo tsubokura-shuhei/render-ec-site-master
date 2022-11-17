@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <div class="my-5 mx-auto">
+        <div class="">
+            <h5 class="page_title text-center">会員登録画面</h5>
+            <form method="post" class="form-auth signup_screen">
+                {% csrf_token %}
+                <div class="form-label-group form_wrap form_wrap-2">
+                    {% render_field form.first_name class='form-control' placeholder='姓' %}
+                    {% render_field form.last_name class='form-control' placeholder='名' %}
+                </div>
+                <div class="form-label-group">
+                    {% render_field form.email class='form-control' placeholder='メールアドレス' %}
+                </div>
+                <div class="form-label-group">
+                    {% render_field form.password1 class='form-control' placeholder='パスワード' %}
+                </div>
+                <div class="form-label-group">
+                    {% render_field form.password2 class='form-control' placeholder='パスワード(確認)' %}
+                </div>
+                <div class="button mx-auto">
+                    <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">会員登録</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

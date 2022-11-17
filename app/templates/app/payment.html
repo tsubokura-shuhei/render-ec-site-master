@@ -1,0 +1,65 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container mbt-60">
+<div class="my-5">
+    <h3>注文内容を確認する</h3>
+</div>
+
+<form method="post" id="payment-form">
+    <div class="row order">
+        <div class="col-md-9 mb-4">
+            <div class="card">
+                <div class="card-body px-2 py3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="font-weight-bold">お届け先住所</div>
+                            <p>名前：{{ user_data.first_name }} {{ user_data.last_name }}</p>
+                            <p>住所：{{ user_data.address }}</p>
+                            <p>電話番号：{{ user_data.tel }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="font-weight-bold">お支払い方法（クレジットカード支払い）</div>
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="mt-2 mb-2 credit_list">
+                                    <span><input type="radio" name="q1" value="Visa"><img alt="Visa" src="{% static 'img/credit/visa.png' %}" width="40px"> Visa</span>
+                                    <!-- <span><input type="radio" name="q1" value="JCB"><img alt="Visa" src="{% static 'img/credit/jcb.png' %}" width="20px"> JCB</span>
+                                    <span><input type="radio" name="q1" value="Mastercard"><img alt="Visa" src="{% static 'img/credit/master.png' %}" width="20px"> Mastercard</span>
+                                    <span><input type="radio" name="q1" value="American Express"><img alt="Visa" src="{% static 'img/credit/amex.png' %}" width="20px"> American Express</span>
+                                    <span><input type="radio" name="q1" value="Diners Club"><img alt="Visa" src="{% static 'img/credit/diners.png' %}" width="20px"> Diners Club</span> -->
+                                </div>
+                                <div id="card-element"></div>
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center px-2 py-3">
+                    <div class="mb-3">
+                        <button class="btn btn-warning" type="submit">注文を確定する</button>
+                    </div>
+                    <p class="font-weight-bold">注文内容</p>
+                    <p>商品の小計：{{ order.get_total| intcomma }}</p>
+                    <p>配送料:0円</p>
+                    <hr>
+                    <p class="font-weight-bold text-danger">ご請求金額: {{ order.get_total| intcomma }}円</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
+
+{% endblock %}

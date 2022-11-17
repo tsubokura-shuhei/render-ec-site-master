@@ -1,0 +1,169 @@
+{% load cart_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+    <link href="carousel.css" rel="stylesheet">
+    <title>ECサイト</title>
+</head>
+<body class="fixed">
+    <nav class="nav_bar navbar navbar-expand-lg navber-dark bg-black" id="header__inner">
+
+        <div class="container nav_sp">
+            <a href="/" class="navbar-brand"><img src="{% static 'img/logo.svg' %}" width="62" height="51"></a>
+
+            <div>
+            <ul class="nav ml-auto" id="nav_sp">
+                <li class="nav-item">
+                    <a href="/" class="nav-link"><img src="{% static 'img/icon/image05.svg' %}"><br>検索</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'profile' %}" class="nav-link"><img src="{% static 'img/icon/image04.svg' %}"><br>アカウント</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'order' %}" class="nav-link cart">
+                            <img src="{% static 'img/icon/image02.svg' %}"><br>カート
+                            <span class="badge badge-pill badge-warning">
+                                {{ request.user|itemCount }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link"><img src="{% static 'img/icon/image03.svg' %}"><br>お気に入り</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="nav-link"><img src="{% static 'img/icon/image06.svg' %}"><br>ログアウト</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_signup' %}" class="nav-link"><img src="{% static 'img/icon/image04.svg' %}"><br>会員登録</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'account_login' %}" class="nav-link"><img src="{% static 'img/icon/image06.svg' %}"><br>ログイン</a>
+                    </li>
+                {% endif %}
+                
+            </ul>
+            </div>
+
+
+            <div id="nav_sub_sp">
+                <nav class="header__nav nav" id="js-nav">
+
+
+                    <div id="accordion" class="nav__items nav-items accordion-container">
+                        <div class="accordion-title js-accordion-title btn_icon">アイテム</div>
+                        <div class="accordion-content nav-items__item">
+                          <p><a href="">トップス</a></p>
+                          <p><a href="">ジャケット</a></p>
+                          <p><a href="">アウター</a></p>
+                          <p><a href="">パンツ</a></p>
+                          <p><a href="">スーツ/ネクタイ</a></p>
+                          <p><a href="">バッグ</a></p>
+                          <p><a href="">シューズ</a></p>
+                          <p><a href="">ファッション雑貨</a></p>
+                          <p><a href="">アクセサリー</a></p>
+                          <p><a href="">帽子</a></p>
+                          <p><a href="">その他</a></p>
+                          <p><a href="">定番商品</a></p>
+                          <p><a href="">セール</a></p>
+                          <p><a href="">予約</a></p>
+                          <p><a href="">アウトレット</a></p>
+                        </div><!--/.accordion-content-->
+                        <div><a href="" class="accordion-title btn_icon right_icon">おすすめ商品</a></div>
+
+                        <div><a href="" class="accordion-title btn_icon right_icon">ランキング</a></div>
+
+                        <div><a href="" class="accordion-title btn_icon right_icon">特集</a></div>
+                        
+                        <div class="accordion-title js-accordion-title btn_icon">ブランド</div>
+                        <div class="accordion-content nav-items__item">
+                          <p><a href="">MEN’S BIGI</a></p>
+                          <p><a href="">CROWDED CLOSET</a></p>
+                          <p><a href="">UNION STATION</a></p>
+                          <p><a href="">RATTLETRAP</a></p>
+                          <p><a href="">FUSE MEN'S BIGI</a></p>
+                        </div><!--/.accordion-content-->
+
+                        <div><a href="" class="accordion-title btn_icon right_icon">ブログ</a></div>
+
+                        <div><a href="" class="accordion-title btn_icon right_icon last">カタログ</a></div>
+                        
+                    </div>
+
+                    <div class="header__nav_sub">
+                      <div class="sub_link"><a href="">ABOUT</a></div>
+                      <div class="sub_link"><a href="">ご利用ガイド</a></div>
+                      <div class="sub_link"><a href="">よくあるご質問</a></div>
+                      <div class="sub_link"><a href="">お問い合わせ</a></div>
+                      <div class="sub_link"><a href="">ポイントについて</a></div>
+                      <div class="sub_link"><a href="">配送について</a></div>
+                    </div><a></a>
+                  </nav>
+          
+                  <button class="header__hamburger hamburger" id="js-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
+            </div>
+            
+
+        </div>
+    </nav>
+
+    
+
+    <nav class="header_frame" id="nav_sub_pc">
+        <div class="main_frame">
+            <ul class="header_nav_main">
+                <li><a href="">アイテム</a></li>
+                <li><a href="">おすすめ商品</a></li>
+                <li><a href="">ランキング</a></li>
+                <li><a href="">特集</a></li>
+                <li><a href="">ブランド</a></li>
+                <li><a href="">ブログ</a></li>
+                <li><a href="">カタログ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+
+    
+    
+    <main>
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer>
+        <div class="py-2">
+            <p class="m-0 text-center text-white">Copyright &copy; MEN'S MART</p>
+        </div>
+    </footer>
+
+    {% block extra_js %}
+    {% endblock %}
+
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+
+
+</body>
+</html>
