@@ -3,3 +3,4 @@ django-allauth~=0.41.0
 django-widget-tweaks~=1.4.8
 stripe~=2.27.0
 Pillow~=2.2.1
+django-environ~=0.0.3
