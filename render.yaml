@@ -7,7 +7,7 @@ databases:
 
 services:
   - type: web
-    name: django_ecsite6
+    name: django_ecsite07
     env: python
     region: singapore
     buildCommand: './build.sh'
